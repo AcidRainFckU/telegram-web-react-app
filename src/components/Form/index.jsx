@@ -14,6 +14,7 @@ const Form = (props) => {
     tg.MainButton.setParams({
       text: 'Отправить данные'
     })
+    // eslint-disable-next-line
   }, [])
 
 
@@ -24,7 +25,7 @@ const Form = (props) => {
     } else {
       tg.MainButton.show()
     }
-
+    // eslint-disable-next-line
   }, [country, city])
   
 
