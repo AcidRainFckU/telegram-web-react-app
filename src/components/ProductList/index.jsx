@@ -1,8 +1,10 @@
+// eslint-disable-next-line
 import React, { useCallback, useEffect, useState } from 'react';
 import ProductItem from '../ProductItem';
-import useTelegram from '../../hooks/useTelegram';
+import { useTelegram } from '../../hooks/useTelegram';
 
 import './ProductList.css';
+// eslint-disable-next-line
 import { getTTFB } from 'web-vitals';
 
 const products = [
