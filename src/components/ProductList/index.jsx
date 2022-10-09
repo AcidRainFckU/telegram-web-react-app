@@ -26,8 +26,31 @@ const getTotalPrice = (items = []) => {
 
 const ProductList = () => {
   const [addItems, setAddedItems] = useState([]);
+  const { tg, queryId } = useTelegram();
+  // eslint-disable-next-line
+  const onSendData = useCallback(() => {
+    const data = {
+      products: addItems,
+      totalPrice: getTotalPrice(addItems),
+      queryId: queryId,
+    };
+    fetch('http://localhost:3000', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    // eslint-disable-next-line
+  }, []);
 
-  const { tg } = useTelegram();
+  useEffect(() => {
+    tg.onEvent('mainButtonClicked', onSendData);
+    return () => {
+      tg.offEvent('mainButtonClicked', onSendData);
+    };
+    // eslint-disable-next-line
+  }, [onSendData]);
 
   const onAdd = (product) => {
     const alreadyAdded = addItems.find((item) => item.id === product.id);
