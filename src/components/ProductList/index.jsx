@@ -18,25 +18,25 @@ const products = [
   { id: '8', title: 'Куртка 5', price: 12000, description: 'Зеленого цвета, теплая' },
 ];
 
-const getTotal = (items = []) => {
+const getTotalPrice = (items = []) => {
   return items.reduce((acc, item) => {
     return (acc += item.price);
   });
 };
 
 const ProductList = () => {
-  const [addadItems, setAddedItems] = useState();
+  const [addItems, setAddedItems] = useState();
 
   const { tg } = useTelegram();
 
   const onAdd = (product) => {
-    const alreadyAdd = addadItems.find((item) => item.id === product.id);
+    const alreadyAdded = addItems.find((item) => item.id === product.id);
     let newItems = [];
 
-    if (alreadyAdd) {
-      newItems = addadItems.find((item) => item.id !== product.id);
+    if (alreadyAdded) {
+      newItems = addItems.filter((item) => item.id !== product.id);
     } else {
-      newItems = [...addadItems, product];
+      newItems = [...addItems, product];
     }
 
     setAddedItems(newItems);
@@ -46,7 +46,7 @@ const ProductList = () => {
     } else {
       tg.MainButton.show();
       tg.MainButton.setParams({
-        text: `Купить ${getTotal}`,
+        text: `Купить ${getTotalPrice(newItems)}`,
       });
     }
   };
