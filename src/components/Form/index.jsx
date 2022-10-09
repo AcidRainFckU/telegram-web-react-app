@@ -25,7 +25,7 @@ const Form = (props) => {
       tg.offEvent('mainButtonClicked', onSendData);
     };
     // eslint-disable-next-line
-  }, []);
+  }, [onSendData]);
 
   useEffect(() => {
     tg.MainButton.setParams({
